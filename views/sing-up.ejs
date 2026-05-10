@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h2>Welcome to the clubhose</h2>
+    <%- include("partials/errors.ejs") %>
+    <form action="./sign-up" method="POST">
+      <label for="firstName">Enter first name : </label>
+      <input type="text" id="firstName" name="firstName" />
+      <label for="lastName">Enter last name : </label>
+      <input type="text" id="lastName" name="lastName" />
+      <label for="userName">Enter a username (email): </label>
+      <input type="text" id="userName" name="userName" />
+      <label for="password">Enter a password : </label>
+      <input type="text" id="password" name="password" />
+      <label for="confirmPassword">Confirm the password : </label>
+      <input type="text" id="confirmPassword" name="confirmPassword" />
+      <button type="submit">Create a new user</button>
+    </form>
+    <a href="/">Go back home page ...</a>
+  </body>
+</html>
