@@ -3,10 +3,15 @@ const indexControllers = require("../controllers/indexControllers");
 const formControllers = require("../controllers/formControllers");
 const indexRouter = Router();
 
-indexRouter.get("/", indexControllers.index_GET);
+indexRouter.get("/", indexControllers.login_GET);
+indexRouter.get("/log-in", indexControllers.login_GET);
+indexRouter.get("/messages-board", indexControllers.messageBoard_GET);
 indexRouter.get("/sign-up", indexControllers.signUp_GET);
 indexRouter.post("/sign-up", formControllers.validateForm);
 indexRouter.post("/sign-up", indexControllers.signUp_POST);
 indexRouter.get("/success", indexControllers.success_GET);
+indexRouter.get("/update-membership", indexControllers.updateMembership_GET);
+indexRouter.get("/log-out", indexControllers.logOut_GET);
+indexRouter.get("success-membership", indexControllers.successMembership_GET);
 
 module.exports = indexRouter;

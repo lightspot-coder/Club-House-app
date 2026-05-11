@@ -4,7 +4,7 @@ const path = require("node:path");
 
 const express = require("express");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./config/passport");
 const LocalStrategy = require("passport-local").Strategy;
 const indexRouter = require("./routes/indexRouter");
 const app = express();
@@ -16,9 +16,21 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", indexRouter);
+app.get("/log-in", indexRouter);
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  }),
+);
+app.get("/log-out", indexRouter);
 app.get("/sign-up", indexRouter);
 app.post("/sign-up", indexRouter);
 app.get("/success", indexRouter);
+app.get("/update-membership", indexRouter);
+app.get("/messages-board", indexRouter);
+app.get("success-membership", indexRouter);
 
 app.listen(3000, (error) => {
   if (error) {

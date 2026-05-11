@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <%if(locals.wrongSecretPassword){%>
+        <p><b>The secret password is incorrect</b></p>
+    <%}%>
+    <h2>Do you want to join our club? </h2>
+    <form method="GET">  
+    <label>enter the secret password : <input type="text" name="secret" /></label>
+    <input type="hidden" name="secondtry">
+    <button type="submit">Submit</button>
+    </form>
+    <a href="/">Go back home page ...</a>
+  </body>
+</html>

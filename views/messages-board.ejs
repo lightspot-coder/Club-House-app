@@ -6,7 +6,12 @@
     <title><%=title%></title>
   </head>
   <body>
-    <h2>Welcome to the clubhouse app</h2>
+    <%if (locals.user) {%>
+       <h2>Welcome to the clubhouse <%=locals.user.fullname%></h2>
+       <h3>your membership is <%=locals.user.membership_status%></h3>
+      <%}else{%>
+         <h2>Welcome to the clubhouse visitor</h2>
+        <%}%>
     <ul>
         <% messages.map(message => { %>
             <li>
@@ -16,6 +21,7 @@
             </li>
         <% }) %>
     </ul>
-    <a href="/sign-up">Add a new user</a>
+    <a href="/update-membership">Update your membership</a>
+    <a href="/log-out">log out</a>
   </body>
 </html>

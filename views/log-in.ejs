@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h1>Club house app </h1>
+    <% if(locals.user) {%>
+        <h2>Welcome back <%= user.username %></h2>
+        <a href="/messages-board">GO TO THE MESSAGE BOARD</a>
+        <a href="/log-out">LOG OUT</a>
+    <%} else { %>
+    <h2>please log in</h2>
+    <form method="POST" action="/login">
+      <label for="username">Enter your user name : </label>
+      <input type="text" id="username" name="username" />
+      <label for="password">Enter your password : </label>
+      <input type="text" id="password" name="password" />
+      <button type="submit">Login</button>
+    </form>
+    <a href="/sign-up">Create a new account</a>
+    <%}%>
+  </body>
+</html>

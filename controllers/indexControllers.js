@@ -1,17 +1,26 @@
 const db = require("../db/queries");
 const { matchedData } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const secretPassword = "cat";
 
-async function index_GET(req, res) {
+function login_GET(req, res) {
+  res.render("log-in", {
+    title: "login",
+    user: req.user,
+  });
+}
+
+async function messageBoard_GET(req, res) {
   const messages = await db.getMessages();
-  console.log(messages);
-  res.render("index", {
+
+  res.render("messages-board", {
     title: "Clubhouse home",
     messages: messages,
+    user: req.user,
   });
 }
 function signUp_GET(req, res) {
-  res.render("sing-up", {
+  res.render("sign-up", {
     title: "Sign up",
   });
 }
@@ -34,9 +43,57 @@ async function signUp_POST(req, res) {
     userName: userName,
   });
 }
+async function updateMembership_GET(req, res) {
+  const secondTry = req.query.secondtry;
+  const secret = req.query.secret;
+  const username = req.user.username;
+  let wrongSecretPassword = true;
+  if (secret === secretPassword) {
+    await db.updateMembership(username);
+    wrongSecretPassword = false;
+    res.render("success-membership", {
+      title: "success",
+      user: req.user,
+    });
+    return;
+  }
+  if (secondTry === undefined) {
+    res.render("update-membership", {
+      title: "update membership",
+      user: req.user,
+    });
+    return;
+  }
+  res.render("update-membership", {
+    title: "update membership",
+    user: req.user,
+    wrongSecretPassword: wrongSecretPassword,
+  });
+}
+
+function logOut_GET(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+
+function successMembership_GET(req, res) {
+  res.render("success-membership", {
+    title: "success membership",
+    user: req.user,
+  });
+}
+
 module.exports = {
-  index_GET,
+  messageBoard_GET,
   signUp_GET,
   success_GET,
   signUp_POST,
+  updateMembership_GET,
+  login_GET,
+  logOut_GET,
+  successMembership_GET,
 };
