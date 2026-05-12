@@ -21,8 +21,6 @@ const validateUser = [
     .withMessage("user name not valid"),
   body("password").notEmpty().withMessage("Password can not be empty"),
   body("confirmPassword").custom((value, { req }) => {
-    console.log(req.body.password);
-    console.log(value);
     if (value !== req.body.password) {
       throw new Error("confirm password doesn't match");
     }
@@ -40,7 +38,6 @@ const validateForm = [
         errors: errors.array(),
       });
     }
-    console.log("go to the next middleware");
     next();
   },
 ];

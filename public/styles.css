@@ -1,13 +1,40 @@
 body {
+  margin: 5% 20%;
+  width: 500px;
   background-color: rgb(201, 223, 248);
   color: rgb(145, 52, 52);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+h1,
+h2,
+h3,
+h4 {
+  margin: 10px;
 }
 h1 {
   font-style: italic;
+}
+h3 {
+  font-style: italic;
+}
+ul {
+  padding-left: 0;
+  border: 2px solid brown;
+  border-radius: 10px;
+  list-style: none;
+}
+
+ul > h2 {
+  padding: 10px;
+  border-bottom: 2px solid brown;
+  margin-bottom: 20px;
+}
+li {
+  padding-left: 20px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid brown;
 }
 form {
   display: flex;

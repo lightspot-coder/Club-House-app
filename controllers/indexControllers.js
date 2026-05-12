@@ -6,7 +6,6 @@ const secretPassword = "cat";
 function login_GET(req, res) {
   res.render("log-in", {
     title: "login",
-    user: req.user,
   });
 }
 
@@ -16,7 +15,7 @@ async function messageBoard_GET(req, res) {
   // change the usernames and timestamp to hidden if the user is not a member or is a visitor
   if (!req.user || req.user.membership_status == "disable") {
     messages.map((message) => {
-      message.username = "hidden";
+      message.fullname = "hidden";
       message.timestamp = "hidden";
     });
   }

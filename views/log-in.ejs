@@ -5,26 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles.css" />
     <title><%=title%></title>
-    
   </head>
   <body>
-    <h1>Club house app </h1>
+    <h1>Club house app</h1>
     <%include("partials/errors.ejs")%>
-    <% if(locals.user) {%>
-        <h2>Welcome back <%= user.username %></h2>
-        <a href="/create-message">Create a new message</a>
-        <a href="/log-out">Log out</a>
-    <%} else { %>
     <h2>Log in</h2>
     <form method="POST" action="/log-in">
       <label for="username">Enter your user name : </label>
       <input type="text" id="username" name="username" />
       <label for="password">Enter your password : </label>
       <input type="text" id="password" name="password" />
-      <button type="submit">Login</button>
+      <button type="submit">Log in</button>
     </form>
     <a href="/sign-up">Create a new account</a>
-    <%}%>
     <a href="/messages-board">Go to the message board</a>
   </body>
 </html>

@@ -22,7 +22,7 @@ app.get("/log-in", indexRouter);
 app.post(
   "/log-in",
   passport.authenticate("local", {
-    successRedirect: "/log-in",
+    successRedirect: "/messages-board",
     failureRedirect: "/log-in",
   }),
 );
