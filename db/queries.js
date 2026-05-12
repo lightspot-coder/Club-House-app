@@ -1,7 +1,15 @@
 const pool = require("./pool");
 
 async function getMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages;");
+  const { rows } = await pool.query(
+    "SELECT username,title,timestamp,text FROM messages JOIN users ON users.id = messages.user_id;",
+  );
+  return rows;
+}
+async function getUserNamesAndIds() {
+  const { rows } = await pool.query(
+    " SELECT DISTINCT users.id,username FROM users JOIN messages ON users.id = messages.user_id;",
+  );
   return rows;
 }
 async function addUser({ firstName, lastName, userName, password }) {
@@ -10,20 +18,11 @@ async function addUser({ firstName, lastName, userName, password }) {
     [firstName + " " + lastName, userName, password, "disable"],
   );
 }
-async function updateMembership(userName) {
-  const { rows } = await pool.query(
-    "SELECT id FROM users WHERE username = $1",
-    [userName],
-  );
-  const user_id = rows[0];
-  if (user_id == undefined) {
-    throw new Error("user not find");
-    return;
-  }
-  console.log(user_id);
+async function updateMembership(userId) {
+  console.log(userId);
   await pool.query(
     "UPDATE users SET membership_status = 'enable' WHERE id = $1;",
-    [user_id.id],
+    [userId],
   );
 }
 async function getUserInfo(username) {
@@ -66,4 +65,5 @@ module.exports = {
   getUserInfoById,
   addMessage,
   getMessageById,
+  getUserNamesAndIds,
 };

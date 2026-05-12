@@ -15,7 +15,8 @@
     <ul>
         <% messages.map(message => { %>
             <li>
-                <h3><%=message.title%> written by <%=message.user_id%></h3>
+                <h3><%=message.title%> written by <%=message.username%>
+                </h3>
                 <p><b>date : </b><%=message.timestamp%></p>
                 <p><b>text : </b> <%=message.text%></p>
             </li>

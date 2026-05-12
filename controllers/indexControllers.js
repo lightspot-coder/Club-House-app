@@ -13,6 +13,15 @@ function login_GET(req, res) {
 async function messageBoard_GET(req, res) {
   const messages = await db.getMessages();
 
+  // change the usernames and timestamp to hidden if the user is not a member
+  //console.log(req.user);
+  if (req.user.membership_status == "disable") {
+    console.log("user is not a member");
+    messages.map((message) => {
+      message.username = "hidden";
+      message.timestamp = "hidden";
+    });
+  }
   res.render("messages-board", {
     title: "Clubhouse home",
     messages: messages,
@@ -46,10 +55,10 @@ async function signUp_POST(req, res) {
 async function updateMembership_GET(req, res) {
   const secondTry = req.query.secondtry;
   const secret = req.query.secret;
-  const username = req.user.username;
+  const userId = req.user.id;
   let wrongSecretPassword = true;
   if (secret === secretPassword) {
-    await db.updateMembership(username);
+    await db.updateMembership(userId);
     wrongSecretPassword = false;
     res.render("success-membership", {
       title: "success",
