@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <%if(locals.user) {%>
+    <h2>Create a new message</h2>
+    <form action="/create-message" method="POST">
+      <label for="title">New title : </label>
+      <input type="text" id="title" name="title" />
+      <label for="text">Write the message : </label>
+      <input type="text" id="text" name="text" />
+      <button type="submit">Create</button>
+    </form>
+    <%} else {%>
+        <h2>Error : You can't create a message if you don't log in</h2>
+    <%}%>
+    <a href="/">Go back home</a>
+    
+  </body>
+</html>

@@ -30,7 +30,14 @@ app.post("/sign-up", indexRouter);
 app.get("/success", indexRouter);
 app.get("/update-membership", indexRouter);
 app.get("/messages-board", indexRouter);
-app.get("success-membership", indexRouter);
+app.get("/success-membership", indexRouter);
+app.get("/create-message", indexRouter);
+app.post("/create-message", indexRouter);
+app.get(/^\/.+$/, (req, res) => {
+  res.status(200).render("error", {
+    title: "error page",
+  });
+});
 
 app.listen(3000, (error) => {
   if (error) {

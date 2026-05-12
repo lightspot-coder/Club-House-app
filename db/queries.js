@@ -36,6 +36,27 @@ async function getUserInfoById(id) {
   const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
   return rows[0];
 }
+async function addMessage(userId, message) {
+  const currentDate = new Date();
+  const timestamp =
+    currentDate.getFullYear() +
+    "-" +
+    (currentDate.getMonth() + 1) +
+    "-" +
+    currentDate.getDate();
+  console.log(timestamp);
+  const { rows } = await pool.query(
+    "INSERT INTO messages (user_id,title, timestamp, text) VALUES ($1,$2,$3,$4) RETURNING id;",
+    [userId, message.title, timestamp, message.text],
+  );
+  return rows[0]; // return last id insert into messages table
+}
+async function getMessageById(id) {
+  const { rows } = await pool.query("SELECT * FROM messages WHERE id=$1;", [
+    id,
+  ]);
+  return rows[0];
+}
 
 module.exports = {
   getMessages,
@@ -43,4 +64,6 @@ module.exports = {
   updateMembership,
   getUserInfo,
   getUserInfoById,
+  addMessage,
+  getMessageById,
 };

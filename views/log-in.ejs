@@ -9,8 +9,9 @@
     <h1>Club house app </h1>
     <% if(locals.user) {%>
         <h2>Welcome back <%= user.username %></h2>
-        <a href="/messages-board">GO TO THE MESSAGE BOARD</a>
-        <a href="/log-out">LOG OUT</a>
+        <a href="/create-message">Create a new message</a>
+        <a href="/messages-board">Go to the message board</a>
+        <a href="/log-out">Log out</a>
     <%} else { %>
     <h2>please log in</h2>
     <form method="POST" action="/login">

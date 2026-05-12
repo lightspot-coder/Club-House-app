@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <%if(locals.user){%>
+        <%if(locals.message){%>
+            <h2>Success: A new message was created</h2>
+            <h3>Message information:</h3>
+            <p><b>Message id : </b> <%=message.id%></p>
+            <p><b>Written by the user : </b><%=message.user_id%></p>
+            <p><b>Date written : </b><%=message.timestamp%></p>
+            <p><b>Title : </b><%=message.title%></p>
+            <p><b>Text : </b><%=message.text%></p>
+        <%}else{%>
+            <h2>Ups!, something goes wrong adding the new message.</h2>
+        <%}%>
+    <%}else{%>
+        <h2>Ups!, you mustn't see this message if you are not log in</h2>
+    <%}%>
+    <a href="/messages-board">Go back to the message board</a>
+  </body>
+</html>

@@ -35,7 +35,7 @@ const validateForm = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("sing-up", {
+      return res.status(400).render("sign-up", {
         title: "sign up error",
         errors: errors.array(),
       });
