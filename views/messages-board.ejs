@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
     <title><%=title%></title>
   </head>
   <body>
     <h1>Club house app </h1>
     <%if (locals.user) {%>
-       <h2>Welcome to the clubhouse <%=locals.user.fullname%></h2>
+       <h2>Welcome <%=locals.user.fullname%></h2>
        <h3>your membership is <%=locals.user.membership_status%></h3>
     <%}else{%>
-         <h2>Welcome to the clubhouse visitor</h2>
+         <h2>Welcome visitor</h2>
     <%}%>
     <ul>
         <% messages.map(message => { %>
