@@ -13,9 +13,7 @@ async function createMessage_POST(req, res) {
     text: req.body.text,
   };
   const messageId = await db.addMessage(req.user.id, message);
-  console.log("message id", messageId.id);
   const storeMessage = await db.getMessageById(messageId.id);
-  console.log("message store : ", storeMessage);
   res.render("success-message", {
     title: "success new message",
     user: req.user,

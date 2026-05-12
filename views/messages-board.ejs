@@ -6,12 +6,13 @@
     <title><%=title%></title>
   </head>
   <body>
+    <h1>Club house app </h1>
     <%if (locals.user) {%>
        <h2>Welcome to the clubhouse <%=locals.user.fullname%></h2>
        <h3>your membership is <%=locals.user.membership_status%></h3>
-      <%}else{%>
+    <%}else{%>
          <h2>Welcome to the clubhouse visitor</h2>
-        <%}%>
+    <%}%>
     <ul>
         <% messages.map(message => { %>
             <li>
@@ -19,10 +20,21 @@
                 </h3>
                 <p><b>date : </b><%=message.timestamp%></p>
                 <p><b>text : </b> <%=message.text%></p>
+                <%if((locals.user)&&(locals.user.admin=='true')){%>
+                  <a href="/delete-message?id=<%=message.id%>" >Delete message</a>
+                <%}%>
             </li>
         <% }) %>
     </ul>
-    <a href="/update-membership">Update your membership</a>
-    <a href="/log-out">log out</a>
+    <%if(locals.user){%>
+      <a href="/create-message">Create a new message</a>
+      <%if(locals.user.membership_status == 'disable'){%>
+        <a href="/update-membership">Update your membership</a>
+      <%}%>
+      <a href="/log-out">log out</a>
+    <%}else{%>
+      <a href="log-in">log in</a>
+      <a href="sign-up">Create a new user</a>
+    <%}%>
   </body>
 </html>

@@ -8,7 +8,6 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await db.getUserInfo(username);
-
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
@@ -31,7 +30,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.getUserInfoById(id);
-    console.log(user);
+
     done(null, user);
   } catch (err) {
     done(err);

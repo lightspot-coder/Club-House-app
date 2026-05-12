@@ -4,9 +4,10 @@ const formControllers = require("../controllers/formControllers");
 const createMessageControllers = require("../controllers/createMessageControllers");
 const indexRouter = Router();
 
-indexRouter.get("/", indexControllers.login_GET);
-indexRouter.get("/log-in", indexControllers.login_GET);
+indexRouter.get("/", indexControllers.messageBoard_GET);
+indexRouter.get("/home", indexControllers.messageBoard_GET);
 indexRouter.get("/messages-board", indexControllers.messageBoard_GET);
+indexRouter.get("/log-in", indexControllers.login_GET);
 indexRouter.get("/sign-up", indexControllers.signUp_GET);
 indexRouter.post("/sign-up", formControllers.validateForm);
 indexRouter.post("/sign-up", indexControllers.signUp_POST);
@@ -19,5 +20,6 @@ indexRouter.post(
   "/create-message",
   createMessageControllers.createMessage_POST,
 );
+indexRouter.get("/delete-message", indexControllers.deleteMessage_GET);
 
 module.exports = indexRouter;

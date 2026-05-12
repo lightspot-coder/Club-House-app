@@ -13,10 +13,8 @@ function login_GET(req, res) {
 async function messageBoard_GET(req, res) {
   const messages = await db.getMessages();
 
-  // change the usernames and timestamp to hidden if the user is not a member
-  //console.log(req.user);
-  if (req.user.membership_status == "disable") {
-    console.log("user is not a member");
+  // change the usernames and timestamp to hidden if the user is not a member or is a visitor
+  if (!req.user || req.user.membership_status == "disable") {
     messages.map((message) => {
       message.username = "hidden";
       message.timestamp = "hidden";
@@ -40,14 +38,19 @@ function success_GET(req, res) {
 }
 async function signUp_POST(req, res) {
   const { firstName, lastName, userName, password } = matchedData(req);
+  let admin = req.body.admin;
+  if (admin == undefined) {
+    admin = "false";
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
   await db.addUser({
     firstName: firstName,
     lastName: lastName,
     userName: userName,
     password: hashedPassword,
+    admin: admin,
   });
-  res.render("success", {
+  res.render("success-sign-up", {
     title: "add user success",
     userName: userName,
   });
@@ -96,6 +99,12 @@ function successMembership_GET(req, res) {
   });
 }
 
+async function deleteMessage_GET(req, res) {
+  console.log(req.query.id);
+  await db.deleteMessage(req.query.id);
+  res.redirect("/");
+}
+
 module.exports = {
   messageBoard_GET,
   signUp_GET,
@@ -105,4 +114,5 @@ module.exports = {
   login_GET,
   logOut_GET,
   successMembership_GET,
+  deleteMessage_GET,
 };

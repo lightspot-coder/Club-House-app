@@ -7,7 +7,7 @@
   </head>
   <body>
     <h2>Welcome to the clubhose</h2>
-    <%- include("partials/signUpErrors.ejs") %>
+    <%- include("partials/errors.ejs") %>
     <form action="./sign-up" method="POST">
       <label for="firstName">Enter first name : </label>
       <input type="text" id="firstName" name="firstName" />
@@ -19,6 +19,8 @@
       <input type="text" id="password" name="password" />
       <label for="confirmPassword">Confirm the password : </label>
       <input type="text" id="confirmPassword" name="confirmPassword" />
+      <input type="checkbox" id="admin" name="admin" value="true" />
+      <label for="admin">I am an admin</label>
       <button type="submit">Create a new user</button>
     </form>
     <a href="/">Go back home page ...</a>

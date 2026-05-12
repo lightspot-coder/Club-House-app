@@ -7,14 +7,14 @@
   </head>
   <body>
     <h1>Club house app </h1>
+    <%include("partials/errors.ejs")%>
     <% if(locals.user) {%>
         <h2>Welcome back <%= user.username %></h2>
         <a href="/create-message">Create a new message</a>
-        <a href="/messages-board">Go to the message board</a>
         <a href="/log-out">Log out</a>
     <%} else { %>
     <h2>please log in</h2>
-    <form method="POST" action="/login">
+    <form method="POST" action="/log-in">
       <label for="username">Enter your user name : </label>
       <input type="text" id="username" name="username" />
       <label for="password">Enter your password : </label>
@@ -23,5 +23,6 @@
     </form>
     <a href="/sign-up">Create a new account</a>
     <%}%>
+    <a href="/messages-board">Go to the message board</a>
   </body>
 </html>
