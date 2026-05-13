@@ -1,7 +1,6 @@
 /////// app.js
 
 const path = require("node:path");
-
 const express = require("express");
 const session = require("express-session");
 const passport = require("./controllers/passport");
@@ -23,9 +22,11 @@ app.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/messages-board",
+    failureMessage: true,
     failureRedirect: "/log-in",
   }),
 );
+
 app.get("/log-out", indexRouter);
 app.get("/sign-up", indexRouter);
 app.post("/sign-up", indexRouter);

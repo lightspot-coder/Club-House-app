@@ -6,14 +6,14 @@ const validateUser = [
     .trim()
     .notEmpty()
     .withMessage("first name can not be empty")
-    .isAlpha()
+    .isAlpha("en-US", { ignore: "\s" })
     .withMessage("first name must only contain letters"),
   body("lastName")
     .trim()
     .notEmpty()
     .withMessage("last name can not be empty")
-    .isAlpha()
-    .withMessage("last name only contain letter"),
+    .isAlpha("en-US", { ignore: "\s" })
+    .withMessage("last name only contain letters"),
   body("userName")
     .notEmpty()
     .withMessage("user name can not be empty")

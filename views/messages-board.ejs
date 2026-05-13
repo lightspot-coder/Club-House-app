@@ -20,21 +20,7 @@
          <h2>Welcome visitor</h2>
          <h4>your status hides the names and dates of the messages</h4>
     <%}%>
-    <ul>
-      <h2>Message board</h2>
-        <% messages.map(message => { %>
-            <li>
-                <h3> - "<%=message.title%>" written by <%=message.fullname%>
-                </h3>
-                <p><b>date : </b><%=message.timestamp%></p>
-                <p><b>text : </b> <%=message.text%></p>
-                <%if((locals.user)&&(locals.user.admin=='true')){%>
-                  <a href="/delete-message?id=<%=message.id%>" >Delete message</a>
-                <%}%>
-            </li>
-        <% }) %>
-    </ul>
-    <a href="/messages-board">Refresh message board</a>
+    
     <%if(locals.user){%>
       <a href="/create-message">Create a new message</a>
       <%if(locals.user.membership_status == 'disable'){%>
@@ -45,6 +31,30 @@
       <a href="log-in">log in</a>
       <a href="sign-up">Create a new user</a>
     <%}%>
-
+    <div class="board">
+    <div class="buttons-board">
+      <a href="/messages-board">Refresh message board</a>
+      <a href="#last">Go to the last message</a>
+    </div>
+    <ul class="message_board">
+      <h2 id="first">Message board</h2>
+        <% messages.map(message => { %>
+            <li class="message">
+                <h3> - "<%=message.title%>" written by <%=message.fullname%>
+                </h3>
+                <p><b>date : </b><%=message.timestamp%></p>
+                <p><b>text : </b> <%=message.text%></p>
+                <%if((locals.user)&&(locals.user.admin=='true')){%>
+                  <a href="/delete-message?id=<%=message.id%>" >Delete message</a>
+                <%}%>
+            </li>
+        <% }) %>
+        <span id="last"></span>
+    </ul>
+    <div class="buttons-board">
+      <a href="#first">Go to the first message</a>
+      <a href="/messages-board">Refresh message board</a>
+    </div>
+    </div>
   </body>
 </html>

@@ -4,9 +4,13 @@ const bcrypt = require("bcryptjs");
 const secretPassword = "cat";
 
 function login_GET(req, res) {
+  console.log(req.session.messages);
+
   res.render("log-in", {
     title: "login",
+    message: req.session.messages,
   });
+  req.session.messages = undefined;
 }
 
 async function messageBoard_GET(req, res) {

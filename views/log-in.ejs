@@ -8,10 +8,12 @@
   </head>
   <body>
     <h1>Club house app</h1>
-    <%include("partials/errors.ejs")%>
+    <%if(locals.message){%>
+      <p><b>Error : <%=locals.message%></b></p>
+    <%}%>
     <h2>Log in</h2>
     <form method="POST" action="/log-in">
-      <label for="username">Enter your user name : </label>
+      <label for="username">Enter your user name (email) : </label>
       <input type="text" id="username" name="username" />
       <label for="password">Enter your password : </label>
       <input type="text" id="password" name="password" />
